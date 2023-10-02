@@ -7,18 +7,18 @@ import Carddetail from "@/components/CardDetail";
 import RichText from "@/components/RichText";
 
 
-const BlogPost = ({ blogPost }) => {
+const BlogPost = ({ blogPost, preview }) => {
   const router = useRouter();
   const { title, media, author, date, blogBody } = blogPost.fields;
   return (
     <div className="min-h-screen flex justify-center items-center p-4 text-black">
       <article className="max-w-3xl w-full p-6 bg-white shadow-md rounded-lg">
-        {/* {preview && (
+        {preview && (
           <>
             You are previewing content:
             <Link href="/api/exit-preview">Exit preview</Link>
           </>
-        )} */}
+        )}
         {router.isFallback ? (
           <div className="text-center text-lg font-semibold">loading..</div>
         ) : (
@@ -31,8 +31,6 @@ const BlogPost = ({ blogPost }) => {
             />
             <div className="mt-4">
               <div className="flex items-center">
-                {/* Assuming you might add an image for the author in the future */}
-                {/* <img src="/path-to-author-image.jpg" alt="Author" className="rounded-full w-12 h-12 mr-4" /> */}
                 <div>
                   <div className="text-lg font-semibold">Author:</div>
                   <div className="text-gray-600">{author}</div>
@@ -50,41 +48,6 @@ const BlogPost = ({ blogPost }) => {
     </div>
   );
   
-  // return (
-  //   <>
-  //     <article>
-  //       {/* {preview && (
-  //         <>
-  //           You are previewing content:
-  //           <Link href="/api/exit-preview">Exit preview</Link>
-  //         </>
-  //       )} */}
-  //       {router.isFallback ? (
-  //         <>loading..</>
-  //       ) : (
-  //         <Carddetail>
-  //           <ImageCard
-  //             // className={styles.bannerImage}
-  //             alt={title}
-  //             src={media.fields.file.url}
-  //             width={media.fields.file.details.image.width}
-  //             height={media.fields.file.details.image.height}
-  //           />
-  //           <div >
-  //             {/* person image */}
-  //             Author:
-  //             <div >
-  //               {author}
-  //             </div>
-  //             </div>
-  //             <h1>{title}</h1>
-  //             <span>Date {date}</span>
-  //           <RichText content={blogBody} />
-  //         </Carddetail>
-  //       )}
-  //     </article>
-  //   </>
-  // );
 };
 
 export const getStaticProps = async ({ params, preview = false }) => {

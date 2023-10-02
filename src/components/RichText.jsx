@@ -66,6 +66,29 @@ const options = {
       }
     },
 
+    [BLOCKS.EMBEDDED_ENTRY]: (node) => {
+      if (node.data.target.sys.contentType.sys.id === "imageWithText") {
+        const { image, text, imageAlignment } = node.data.target.fields;
+
+        if (imageAlignment === "Left") {
+          return (
+            <div className="flex py-10 items-center">
+              <ImageCard src={image.fields.file.url} alt={image.fields.title} width={image.fields.file.details.image.width} height={image.fields.file.details.image.height} />
+              <p className="ml-4">{text}</p>
+            </div>
+          );
+        } else if (imageAlignment === "Right") {
+          return (
+            <div className="flex py-10 items-center">
+              <p className="mr-4">{text}</p>
+              <ImageCard src={image.fields.file.url} alt={image.fields.title} width={image.fields.file.details.image.width} height={image.fields.file.details.image.height} />
+            </div>
+          );
+        }
+      }
+    },
+  
+
     [BLOCKS.EMBEDDED_ASSET]: node => {
       return (
         <ImageCard
@@ -73,7 +96,7 @@ const options = {
           height={node.data.target.fields.file.details.image.height}
           width={node.data.target.fields.file.details.image.width}
           alt={node.data.target.fields.title}
-          className='h-20 w-20 m-4'
+          className='h-30 w-30 m-4'
         />
       )
     }
